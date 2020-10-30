@@ -2,9 +2,10 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AddProductPage from "./pages/addProduct/Addproduct.component";
 import AddSellerPage from "./pages/addSeller/Addseller.component";
+import Productspage from "./pages/products/products.components";
 
 const ROUTES = [
-  { path: "/", key: "HOME", exact: true, component: () => <h1>All products</h1> },
+  { path: "/", key: "HOME", exact: true, component: Productspage },
   { path: "/new/product", key: "NEW_PRODUCT", exact: true, component: AddProductPage },
   { path: "/new/seller", key: "NEW_SELLER", exact: true, component: AddSellerPage },
 
