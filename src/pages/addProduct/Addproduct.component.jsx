@@ -10,7 +10,7 @@ import Select from "@material-ui/core/Select";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Addproduct.styles.css";
+import "./Addproduct.styles.scss";
 toast.configure();
 const styles = (theme) => ({
   textField: {

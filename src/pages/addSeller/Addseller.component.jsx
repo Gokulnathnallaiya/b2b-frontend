@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Addseller.styles.css";
+import "./Addseller.styles.scss";
 toast.configure();
 const styles = (theme) => ({
   textField: {
