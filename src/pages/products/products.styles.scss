@@ -1,6 +1,13 @@
 .container-2{
     display: flex;
+    flex-direction: column;
     width:100%;
+    .title {
+      color: #6568f4;
+      margin: 10px;
+      font-weight: bolder;
+      align-self: center;
+    }
 }
 .collection-preview {
     display: flex;
@@ -12,6 +19,7 @@
         color: #6568f4;
         margin: 10px;
         font-weight: bolder;
+        align-self: center;
       }
   
     .preview {
