@@ -11,6 +11,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Addproduct.styles.css";
+import UploadPreview from "../../components/uploadPreview/uploadPreview.component";
 toast.configure();
 const styles = (theme) => ({
   textField: {
@@ -38,26 +39,39 @@ class Addseller extends React.Component {
       price: "",
       stock: "",
       seller: "",
+      image: "",
       Loading: false,
+      file: null,
     };
   }
   componentDidMount() {
-    axios.get('https://b2b-backendd.herokuapp.com/sellers/').then(res=>{
-        console.log(res.data)
-        this.setState({sellers:res.data})
-    })
+    axios.get("https://b2b-backendd.herokuapp.com/sellers/").then((res) => {
+      console.log(res.data);
+      this.setState({ sellers: res.data });
+    });
   }
   handleSubmit = () => {
     this.setState({ Loading: true });
+    const formData = new FormData();
+    formData.append("name", this.state.productName);
+    formData.append("description", this.state.description);
+    formData.append("price", this.state.price);
+    formData.append("stock", this.state.stock);
+    formData.append("seller", this.state.seller);
+    formData.append("image", this.state.image);
+    console.log(formData);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
 
     axios
-      .post(`https://b2b-backendd.herokuapp.com/products/newproduct`, {
-        name: this.state.productName,
-        description: this.state.description,
-        price: this.state.price,
-        stock: this.state.stock,
-        seller: this.state.seller,
-      })
+      .post(
+        `https://b2b-backendd.herokuapp.com/products/newproduct`,
+        formData,
+        config
+      )
       .then((res) => {
         console.log(JSON.stringify(res));
         this.setState({
@@ -66,6 +80,7 @@ class Addseller extends React.Component {
           price: "",
           stock: "",
           seller: "",
+          image: null,
           Loading: false,
         });
         toast("Product Added", { type: "info" });
@@ -75,8 +90,8 @@ class Addseller extends React.Component {
         toast("Error Occured", { type: "error" });
       });
   };
-  componentDidUpdate(){
-      console.log(this.state)
+  componentDidUpdate() {
+    console.log(this.state);
   }
   handleSelect = (event) => {
     const { value } = event.target;
@@ -86,6 +101,11 @@ class Addseller extends React.Component {
     const { id, value } = event.target;
     console.log(event.target.id);
     this.setState({ [id]: value });
+  };
+  onChange = (e) => {
+    this.setState({ file: URL.createObjectURL(e.target.files[0]) });
+    this.setState({ image: e.target.files[0] });
+    console.log(e.target.files[0]);
   };
   render() {
     const { classes } = this.props;
@@ -140,22 +160,34 @@ class Addseller extends React.Component {
             value={this.state.seller}
             onChange={this.handleSelect}
             label="Seller"
-            
           >
             <MenuItem value="">
               <em>Select seller</em>
             </MenuItem>
-            {this.state.sellers.map((item,i)=>{
-                console.log(item)
-                if (item!==null){
-                    return(
-                        <MenuItem key={i} value={item}>{item}</MenuItem>
-                    )
-
-                }
-                return ""
+            {this.state.sellers.map((item, i) => {
+              console.log(item);
+              if (item !== null) {
+                return (
+                  <MenuItem key={i} value={item}>
+                    {item}
+                  </MenuItem>
+                );
+              }
+              return "";
             })}
           </Select>
+          <div className="uploadContainer">
+            <p>Upload Image</p>
+            <input
+              className="uploadImage"
+              type="file"
+              name="image"
+              onChange={this.onChange}
+            />
+          </div>
+          <div>
+            <img alt="" className="imgPreview" src={this.state.file} />
+          </div>
         </FormControl>
 
         <Button
@@ -166,6 +198,7 @@ class Addseller extends React.Component {
         >
           ADD PRODUCT
         </Button>
+
         <div>{this.state.Loading ? <CircularProgress /> : null}</div>
       </form>
     );
