@@ -11,7 +11,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Addproduct.styles.css";
-import UploadPreview from "../../components/uploadPreview/uploadPreview.component";
 toast.configure();
 const styles = (theme) => ({
   textField: {
