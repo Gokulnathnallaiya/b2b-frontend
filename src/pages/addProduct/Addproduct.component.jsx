@@ -195,6 +195,8 @@ class Addseller extends React.Component {
           color="primary"
           size="medium"
           variant="contained"
+          style={{maxHeight: '100%', minWidth: '90%'}}
+          
         >
           ADD PRODUCT
         </Button>
