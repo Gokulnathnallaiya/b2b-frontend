@@ -15,7 +15,7 @@ class Productspage extends React.Component {
 
   componentDidMount() {
     this.setState({ Loading: true });
-    axios.get("http://b2b-backendd.herokuapp.com/products").then((res) => {
+    axios.get("https://b2b-backendd.herokuapp.com/products").then((res) => {
       this.setState({ products: res.data }, () => {
         console.log(this.state.products);
         this.setState({ Loading: false });
