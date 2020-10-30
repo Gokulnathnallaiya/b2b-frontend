@@ -28,7 +28,7 @@ class Productspage extends React.Component {
       return <CircularProgress />;
     } else {
       return (
-        <div className="container">
+        <div className="container-2">
           <h2 className="title">All products</h2>
 
           <div className="collection-preview">
