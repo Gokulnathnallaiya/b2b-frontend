@@ -28,12 +28,16 @@ class Productspage extends React.Component {
       return <CircularProgress />;
     } else {
       return (
-        <div className="collection-preview">
-          <div className="preview">
-            {this.state.products.map((item) => {
-              console.log(item.data);
-              return <Card item={item} />;
-            })}
+        <div className="container">
+          <h2 className="title">All products</h2>
+
+          <div className="collection-preview">
+            <div className="preview">
+              {this.state.products.map((item) => {
+                console.log(item.data);
+                return <Card item={item} />;
+              })}
+            </div>
           </div>
         </div>
       );
