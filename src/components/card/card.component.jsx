@@ -16,8 +16,6 @@ const Card = ({ item }) => {
       <div className="footer">
         <div className="collection-footer">
           <span className="seller">Sold by {seller}</span>
-        </div>
-        <div className="collection-footer">
           <span className="name">{name}</span>
           <span className="price"> {"₹ " + price}</span>
         </div>
