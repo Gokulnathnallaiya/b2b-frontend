@@ -33,9 +33,10 @@ class Addseller extends React.Component {
     super(props);
     this.state = {
       sellers: [],
-      productName: "",
+      title: "",
       description: "",
-      price: "",
+      disPrice: "",
+      oriPrice:"",
       stock: "",
       seller: "",
       image: "",
@@ -52,9 +53,10 @@ class Addseller extends React.Component {
   handleSubmit = () => {
     this.setState({ Loading: true });
     const formData = new FormData();
-    formData.append("name", this.state.productName);
+    formData.append("title", this.state.title);
     formData.append("description", this.state.description);
-    formData.append("price", this.state.price);
+    formData.append("oriPrice", this.state.oriPrice);
+    formData.append("disPrice", this.state.disPrice);
     formData.append("stock", this.state.stock);
     formData.append("seller", this.state.seller);
     formData.append("image", this.state.image);
@@ -74,9 +76,10 @@ class Addseller extends React.Component {
       .then((res) => {
         console.log(JSON.stringify(res));
         this.setState({
-          productName: "",
+          title: "",
           description: "",
-          price: "",
+          oriPrice: "",
+          disPrice:"",
           stock: "",
           seller: "",
           image: null,
@@ -113,11 +116,11 @@ class Addseller extends React.Component {
         <h2 className="title">New Product</h2>
         <TextField
           size="small"
-          id="productName"
-          label="Product Name"
+          id="title"
+          label="Title"
           variant="outlined"
           onChange={this.handleChange}
-          value={this.state.productName}
+          value={this.state.title}
           className={classes.textField}
         />
         <TextField
@@ -134,10 +137,20 @@ class Addseller extends React.Component {
 
         <TextField
           size="small"
-          label="Price"
+          label="Original Price"
           onChange={this.handleChange}
-          value={this.state.price}
-          id="price"
+          value={this.state.oriPrice}
+          id="oriPrice"
+          variant="outlined"
+          type="number"
+          className={classes.textField}
+        />
+        <TextField
+          size="small"
+          label="Discounted Price"
+          onChange={this.handleChange}
+          value={this.state.disPrice}
+          id="disPrice"
           variant="outlined"
           type="number"
           className={classes.textField}
